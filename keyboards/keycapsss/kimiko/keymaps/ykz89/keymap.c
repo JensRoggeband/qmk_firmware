@@ -19,6 +19,7 @@
 #include QMK_KEYBOARD_H
 
 enum layers {
+    _COLEMAK,
     _QWERTY,
     _LOWER,
     _RAISE,
@@ -27,9 +28,32 @@ enum layers {
 
 #define RAISE MO(_RAISE)
 #define LOWER MO(_LOWER)
+#define COLEMAK DF(_COLEMAK)
+#define QWERTY DF(_QWERTY)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
+/* COLEMAK
+ * ,--------------------------------------------.                    ,----------------------------------------------.
+ * |   ESC   |   1  |   2  |   3  |   4  |   5  |                    |   6  |   7  |   8  |   9  |   0  |  `        |
+ * |---------+------+------+------+------+------|                    |------+------+------+------+------+-----------|
+ * |   Tab   |   Q  |   W  |   F  |   P  |   B  |                    |   J  |   L  |   U  |   Y  |   ;  |  -        |
+ * |---------+------+------+------+------+------|                    |------+------+------+------+------+-----------|
+ * |  LShift |   A  |   R  |   S  |   T  |   G  |-------.    ,-------|   M  |   N  |   E  |   I  |   O  |  '        |
+ * |---------+------+------+------+------+------|   [   |    |    ]  |------+------+------+------+------+-----------|
+ * |  LCTRL  |   Z  |   X  |   C  |   D  |   V  |-------|    |-------|   K  |   H  |   ,  |   .  |   /  |RShift/Enter|
+ * `-------------------------------------------|       /     \      \-----------------------------------------------'
+ *                 | LCTRL| LGUI | LALT |LOWER| Space /       \Enter \  |RAISE |BackSP| RGUI | RALT |
+ *                 `----------------------------------'       '------------------------------------'
+ */
+
+ [_COLEMAK] = LAYOUT(
+    KC_ESC,   KC_1,   KC_2,    KC_3,    KC_4,    KC_5,                        KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_GRV,
+    KC_TAB,   KC_Q,   KC_W,    KC_F,    KC_P,    KC_B,                        KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_MINS,
+    KC_LSFT,  KC_A,   KC_R,    KC_S,    KC_T,    KC_G,                        KC_M,    KC_N,    KC_E,    KC_I,    KC_O, KC_QUOT,
+    KC_LCTRL, KC_Z,   KC_X,    KC_C,    KC_D,    KC_V,    KC_LBRC,  KC_RBRC,  KC_K,    KC_H,    KC_COMM, KC_DOT,  KC_SLSH, RSFT_T(KC_ENT),
+                      KC_LCTL, KC_LGUI, KC_LALT, LOWER,   KC_SPC,   KC_ENT,   RAISE,   KC_BSPC, KC_RGUI, KC_RALT
+),
 /* QWERTY
  * ,--------------------------------------------.                    ,----------------------------------------------.
  * |   ESC   |   1  |   2  |   3  |   4  |   5  |                    |   6  |   7  |   8  |   9  |   0  |  `        |
@@ -53,7 +77,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 /* LOWER
  * ,-------------------------------------------.                    ,-----------------------------------------.
- * |        |  F1  |  F2  |  F3  |  F4  |  F5  |                    |  F6  |  F7  |  F8  |  F9  | F10  | F11  |
+ * |        |  F1  |  F2  |  F3  |  F4  |  F5  |                    |  F6  |  F7  |  F8  |  F9  | F10  | F11  |
  * |--------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * |        |  1   |  2   |  3   |  4   |  5   |                    |  6   |  7   |  8   |  9   |   0  | F12  |
  * |--------+------+------+------+------+------|                    |------+------+------+------+------+------|
@@ -95,9 +119,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 /* ADJUST (Press LOWER and RAISE together)
  * ,-----------------------------------------.                    ,-----------------------------------------.
- * |RESET |      |      |      |      |      |                    |      |      |      |      |      |      |
+ * |RESET |      |      |      |      |      |                    |      |      |      |      |      |COLMK |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |RGB ON| HUE+ | SAT+ | VAL+ |      |      |                    | PREV | PLAY | NEXT |      |      |      |
+ * |RGB ON| HUE+ | SAT+ | VAL+ |      |      |                    | PREV | PLAY | NEXT |      |      |QWERTY|
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * | MODE | HUE- | SAT- | VAL- |      |      |-------.    ,-------| VOL+ | MUTE | VOL- |      |      |      |
  * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
@@ -108,8 +132,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 
 [_ADJUST] = LAYOUT(
-    RESET,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-    RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI, XXXXXXX, XXXXXXX,                   KC_MPRV, KC_MPLY, KC_MNXT, XXXXXXX, XXXXXXX, XXXXXXX,
+    RESET,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, COLEMAK,
+    RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI, XXXXXXX, XXXXXXX,                   KC_MPRV, KC_MPLY, KC_MNXT, XXXXXXX, XXXXXXX, QWERTY,
     RGB_MOD, RGB_HUD, RGB_SAD, RGB_VAD, XXXXXXX, XXXXXXX,                   KC_VOLU, KC_MUTE, KC_VOLD, XXXXXXX, XXXXXXX, XXXXXXX,
     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
                       _______, _______, _______, _______, _______, _______,  _______, _______, _______, _______
@@ -133,6 +157,14 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
 
 void render_space(void) {
     oled_write_P(PSTR("     "), false);
+}
+
+void render_default_layer(void) {
+    if(layer_state_is(_COLEMAK)) {
+        oled_write_P(PSTR("COLE"), false);
+    } else if(layer_state_is(_QWERTY)) {
+        oled_write_P(PSTR("QWER"), false);
+    }
 }
 
 void render_mod_status_gui_alt(uint8_t modifiers) {
@@ -312,6 +344,8 @@ void render_status_main(void) {
     render_space();
     render_mod_status_gui_alt(get_mods()|get_oneshot_mods());
     render_mod_status_ctrl_shift(get_mods()|get_oneshot_mods());
+    render_space();
+    render_default_layer();
 }
 
 void render_status_secondary(void) {
