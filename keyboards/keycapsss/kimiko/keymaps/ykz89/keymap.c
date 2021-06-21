@@ -159,11 +159,14 @@ void render_space(void) {
     oled_write_P(PSTR("     "), false);
 }
 
-void render_default_layer(void) {
-    if(layer_state_is(_COLEMAK)) {
-        oled_write_P(PSTR("COLE"), false);
-    } else if(layer_state_is(_QWERTY)) {
-        oled_write_P(PSTR("QWER"), false);
+void render_default_layer_state(void) {
+    switch (get_highest_layer(default_layer_state)) {
+        case _COLEMAK:
+            oled_write_ln_P(PSTR("Colem\n"), false);
+            break;
+        case _QWERTY:
+            oled_write_ln_P(PSTR("Qwert\n"), false);
+            break;
     }
 }
 
@@ -345,7 +348,7 @@ void render_status_main(void) {
     render_mod_status_gui_alt(get_mods()|get_oneshot_mods());
     render_mod_status_ctrl_shift(get_mods()|get_oneshot_mods());
     render_space();
-    render_default_layer();
+    render_default_layer_state();
 }
 
 void render_status_secondary(void) {
