@@ -19,8 +19,8 @@
 #include QMK_KEYBOARD_H
 
 enum layers {
-    _COLEMAK,
     _QWERTY,
+    _COLEMAK,
     _GAMING,
     _NAV,
     _MOUSE,
@@ -48,72 +48,71 @@ enum layers {
 #define U_UND C(KC_Z)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-
-    [_COLEMAK] = LAYOUT(
+  [_COLEMAK] = LAYOUT(
     KC_ESC   , KC_1         , KC_2         , KC_3         , KC_4         , KC_5 ,                          KC_6 , KC_7         , KC_8         , KC_9           , KC_0         , KC_GRV         ,
     KC_TAB   , KC_Q         , KC_W         , KC_F         , KC_P         , KC_B ,                          KC_J , KC_L         , KC_U         , KC_Y           , KC_SCLN      , KC_MINS        ,
     KC_LSFT  , LGUI_T(KC_A) , LALT_T(KC_R) , LCTL_T(KC_S) , LSFT_T(KC_T) , KC_G ,                          KC_M , LSFT_T(KC_N) , LCTL_T(KC_E) , LALT_T(KC_I)   , LGUI_T(KC_O) , KC_QUOT        ,
     KC_LCTRL , KC_Z         , ALGR_T(KC_X) , KC_C         , KC_D         , KC_V , KC_LBRC ,      KC_RBRC , KC_K , KC_H         , KC_COMM      , ALGR_T(KC_DOT) , KC_SLSH      , RSFT_T(KC_ENT) ,
                               XXXXXXX      , XXXXXXX      , MEDIA        , NAV  , MOUSE   ,      SYM     , NUM  , FUN          , XXXXXXX      , QWERTY
-    ),
-
-    [_QWERTY] = LAYOUT(
-    _______ , KC_1         , KC_2         , KC_3         , KC_4         , KC_5    ,                          KC_6    , KC_7         , KC_8         , KC_9           , KC_0            , _______ ,
-    _______ , KC_Q         , KC_W         , KC_E         , KC_R         , KC_T    ,                          KC_Y    , KC_U         , KC_I         , KC_O           , KC_P            , _______ ,
-    _______ , LGUI_T(KC_A) , LALT_T(KC_S) , LCTL_T(KC_D) , LSFT_T(KC_F) , KC_G    ,                          KC_H    , LSFT_T(KC_J) , LCTL_T(KC_K) , LALT_T(KC_L)   , LGUI_T(KC_SCLN) , _______ ,
-    _______ , KC_Z         , ALGR_T(KC_X) , KC_C         , KC_V         , KC_B    , KC_LBRC ,      KC_RBRC , KC_N    , KC_M         , KC_COMM      , ALGR_T(KC_DOT) , KC_SLSH         , _______ ,
-                             _______      , _______      , _______      , _______ , _______ ,      _______ , _______ , _______      , _______      , GAMING
-    ),
-
-    [_GAMING] = LAYOUT(
-    KC_ESC   , KC_1 , KC_2    , KC_3    , KC_4    , KC_5    ,                          KC_6    , KC_7    , KC_8    , KC_9    , KC_0    , _______ ,
-    KC_TAB   , KC_Q , KC_W    , KC_E    , KC_R    , KC_T    ,                          KC_Y    , KC_U    , KC_I    , KC_O    , KC_P    , _______ ,
-    KC_LSFT  , KC_A , KC_S    , KC_D    , KC_F    , KC_G    ,                          KC_H    , KC_J    , KC_K    , KC_L    , KC_SCLN , _______ ,
-    KC_LCTRL , KC_Z , KC_X    , KC_C    , KC_V    , KC_B    , KC_LBRC ,      KC_RBRC , KC_N    , KC_M    , KC_COMM , KC_DOT  , KC_SLSH , _______ ,
-                      KC_Y    , KC_V    , KC_M    , KC_SPC  , KC_LALT ,      _______ , _______ , _______ , _______ , COLEMAK
   ),
 
-    [_NAV] = LAYOUT(
+  [_QWERTY] = LAYOUT(
+    KC_ESC   , KC_1         , KC_2         , KC_3         , KC_4         , KC_5 ,                          KC_6 , KC_7         , KC_8         , KC_9           , KC_0            , KC_GRV         ,
+    KC_TAB   , KC_Q         , KC_W         , KC_E         , KC_R         , KC_T ,                          KC_Y , KC_U         , KC_I         , KC_O           , KC_P            , KC_MINS        ,
+    KC_LSFT  , LGUI_T(KC_A) , LALT_T(KC_S) , LCTL_T(KC_D) , LSFT_T(KC_F) , KC_G ,                          KC_H , LSFT_T(KC_J) , LCTL_T(KC_K) , LALT_T(KC_L)   , LGUI_T(KC_SCLN) , KC_QUOT        ,
+    KC_LCTRL , KC_Z         , ALGR_T(KC_X) , KC_C         , KC_V         , KC_B , KC_LBRC ,      KC_RBRC , KC_N , KC_M         , KC_COMM      , ALGR_T(KC_DOT) , KC_SLSH         , RSFT_T(KC_ENT) ,
+                              XXXXXXX      , XXXXXXX      , MEDIA        , NAV  , MOUSE   ,      SYM     , NUM  , FUN          , XXXXXXX      , GAMING
+  ),
+
+  [_GAMING] = LAYOUT(
+    KC_ESC   , KC_1 , KC_2 , KC_3 , KC_4 , KC_5   ,                          KC_6    , KC_7         , KC_8         , KC_9           , KC_0            , _______ ,
+    KC_TAB   , KC_Q , KC_W , KC_E , KC_R , KC_T   ,                          KC_Y    , KC_U         , KC_I         , KC_O           , KC_P            , _______ ,
+    KC_LSFT  , KC_A , KC_S , KC_D , KC_F , KC_G   ,                          KC_H    , LSFT_T(KC_J) , LCTL_T(KC_K) , LALT_T(KC_L)   , LGUI_T(KC_SCLN) , _______ ,
+    KC_LCTRL , KC_Z , KC_X , KC_C , KC_V , KC_B   , KC_LBRC ,      KC_RBRC , KC_N    , KC_M         , KC_COMM      , ALGR_T(KC_DOT) , KC_SLSH         , _______ ,
+                      KC_Y , KC_V , KC_M , KC_SPC , KC_LALT ,      _______ , _______ , _______      , _______      , COLEMAK
+   ),
+
+  [_NAV] = LAYOUT(
     XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX ,                          XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX ,
     XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX ,                          U_RDO   , U_PST   , U_CPY   , U_CUT   , U_UND   , XXXXXXX ,
     XXXXXXX , KC_LGUI , KC_LALT , KC_LCTL , KC_LSFT , XXXXXXX ,                          KC_CAPS , KC_LEFT , KC_DOWN , KC_UP   , KC_RGHT , XXXXXXX ,
     XXXXXXX , XXXXXXX , KC_ALGR , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX ,      XXXXXXX , KC_INS  , KC_HOME , KC_PGDN , KC_PGUP , KC_END  , XXXXXXX ,
                         XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX ,      KC_ENT  , KC_BSPC , KC_DEL  , XXXXXXX , XXXXXXX
-    ),
+  ),
 
-    [_MOUSE] = LAYOUT(
+  [_MOUSE] = LAYOUT(
     XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX ,                          XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX ,
     XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX ,                          U_RDO   , U_PST   , U_CPY   , U_CUT   , U_UND   , XXXXXXX ,
     XXXXXXX , KC_LGUI , KC_LALT , KC_LCTL , KC_LSFT , XXXXXXX ,                          XXXXXXX , KC_MS_L , KC_MS_D , KC_MS_U , KC_MS_R , XXXXXXX ,
     XXXXXXX , XXXXXXX , KC_ALGR , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX ,      XXXXXXX , XXXXXXX , KC_WH_L , KC_WH_D , KC_WH_U , KC_WH_R , XXXXXXX ,
                         XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX ,      KC_BTN1 , KC_BTN3 , KC_BTN2 , XXXXXXX , XXXXXXX
-    ),
+  ),
 
-    [_MEDIA] = LAYOUT(
+  [_MEDIA] = LAYOUT(
     XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX ,                          XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX ,
     XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX ,                          RGB_TOG , RGB_MOD , RGB_HUI , RGB_SAI , RGB_VAI , XXXXXXX ,
     XXXXXXX , KC_LGUI , KC_LALT , KC_LCTL , KC_LSFT , XXXXXXX ,                          XXXXXXX , KC_MPRV , KC_VOLD , KC_VOLU , KC_MNXT , XXXXXXX ,
     XXXXXXX , XXXXXXX , KC_ALGR , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX ,      XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX ,
                         XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX ,      KC_MSTP , KC_MPLY , KC_MUTE , XXXXXXX , XXXXXXX
-    ),
+  ),
 
-    [_NUM] = LAYOUT(
+  [_NUM] = LAYOUT(
     XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX ,                          XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX ,
     XXXXXXX , KC_LBRC , KC_7    , KC_8    , KC_9    , KC_RBRC ,                          XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX ,
     XXXXXXX , KC_SCLN , KC_4    , KC_5    , KC_6    , KC_EQL  ,                          XXXXXXX , KC_LSFT , KC_LCTL , KC_LALT , KC_LGUI , XXXXXXX ,
     XXXXXXX , KC_GRV  , KC_1    , KC_2    , KC_3    , KC_BSLS , XXXXXXX ,      XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , KC_ALGR , XXXXXXX , XXXXXXX ,
                         XXXXXXX , XXXXXXX , KC_DOT  , KC_0    , KC_MINS ,      XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX
-    ),
+  ),
 
-    [_SYM] = LAYOUT(
+  [_SYM] = LAYOUT(
     XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX ,                          XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX ,
     XXXXXXX , KC_LCBR , KC_AMPR , KC_ASTR , KC_LPRN , KC_RCBR ,                          XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX ,
     XXXXXXX , KC_COLN , KC_DLR  , KC_PERC , KC_CIRC , KC_PLUS ,                          XXXXXXX , KC_LSFT , KC_LCTL , KC_LALT , KC_LGUI , XXXXXXX ,
     XXXXXXX , KC_TILD , KC_EXLM , KC_AT   , KC_HASH , KC_PIPE , XXXXXXX ,      XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , KC_ALGR , XXXXXXX , XXXXXXX ,
                         XXXXXXX , XXXXXXX , KC_LPRN , KC_RPRN , KC_UNDS ,      XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX
-    ),
+  ),
 
-    [_FUN] = LAYOUT(
+  [_FUN] = LAYOUT(
     XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX ,                          XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX ,
     XXXXXXX , KC_F12  , KC_F7   , KC_F8   , KC_F9   , KC_PSCR ,                          XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX ,
     XXXXXXX , KC_F11  , KC_F4   , KC_F5   , KC_F6   , KC_SLCK ,                          XXXXXXX , KC_LSFT , KC_LCTL , KC_LALT , KC_LGUI , XXXXXXX ,
@@ -142,6 +141,9 @@ void render_default_layer_state(void) {
             break;
         case _QWERTY:
             oled_write_ln_P(PSTR("Qwert\n"), false);
+            break;
+        case _GAMING:
+            oled_write_ln_P(PSTR("Game\n"), false);
             break;
     }
 }
