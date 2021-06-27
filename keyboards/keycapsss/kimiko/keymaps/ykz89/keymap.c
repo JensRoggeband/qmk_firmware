@@ -21,6 +21,7 @@
 enum layers {
     _COLEMAK,
     _QWERTY,
+    _WZ,
     _LOWER,
     _RAISE,
     _ADJUST,
@@ -30,6 +31,7 @@ enum layers {
 #define LOWER MO(_LOWER)
 #define COLEMAK DF(_COLEMAK)
 #define QWERTY DF(_QWERTY)
+#define WZ DF(_WZ)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -74,6 +76,27 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_LSFT,  KC_A,   KC_S,    KC_D,    KC_F,    KC_G,                        KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
     KC_LCTRL, KC_Z,   KC_X,    KC_C,    KC_V,    KC_B,    KC_LBRC,  KC_RBRC,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, RSFT_T(KC_ENT),
                       KC_LCTL, KC_LGUI, KC_LALT, LOWER,   KC_SPC,   KC_ENT,   RAISE,   KC_BSPC, KC_RGUI, KC_RALT
+),
+/* WARZONE (FPS/SHOOTER)
+ * ,----------------------------------------------.                    ,----------------------------------------------.
+ * |   ESC   |    1   |   2  |   3  |   4  |   5  |                    |   6  |   7  |   8  |   9  |   0  |  `        |
+ * |---------+--------+------+------+------+------|                    |------+------+------+------+------+-----------|
+ * |    `    |  Tab   |   Q  |   W  |   E  |   R  |                    |   Y  |   U  |   I  |   O  |   P  |  -        |
+ * |---------+--------+------+------+------+------|                    |------+------+------+------+------+-----------|
+ * |  LShift | LShift |   A  |   S  |   D  |   F  |-------.    ,-------|   H  |   J  |   K  |   L  |   ;  |  '        |
+ * |---------+--------+------+------+------+------|   [   |    |    ]  |------+------+------+------+------+-----------|
+ * |  LCTRL  | LCTRL  |   Z  |   C  |   X  |   M  |-------|    |-------|   N  |   M  |   ,  |   .  |   /  |RShift/Enter|
+ * `---------------------------------------------|       /     \      \-----------------------------------------------'
+ *                   | LCTRL| LALT | LALT |LOWER| Space /       \Enter \  |RAISE |BackSP| RGUI | RALT |
+ *                   `----------------------------------'       '------------------------------------'
+ */
+
+ [_WZ] = LAYOUT(
+    KC_ESC,   KC_1,     KC_2,    KC_3,    KC_4,    KC_5,                        KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_GRV,
+    KC_GRV,   KC_TAB,   KC_Q,    KC_W,    KC_E,    KC_R,                        KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_MINS,
+    KC_LSFT,  KC_LSFT,  KC_A,    KC_S,    KC_D,    KC_F,                        KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
+    KC_LCTRL, KC_LCTRL, KC_Z,    KC_C,    KC_X,    KC_M,   KC_LBRC,   KC_RBRC,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, RSFT_T(KC_ENT),
+                      KC_LCTL, KC_LALT, KC_LALT, LOWER,    KC_SPC,    KC_ENT,   RAISE,   KC_BSPC, KC_RGUI, KC_RALT
 ),
 /* LOWER
  * ,-------------------------------------------.                    ,-----------------------------------------.
@@ -123,7 +146,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * |RGB ON| HUE+ | SAT+ | VAL+ |      |      |                    | PREV | PLAY | NEXT |      |      |QWERTY|
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * | MODE | HUE- | SAT- | VAL- |      |      |-------.    ,-------| VOL+ | MUTE | VOL- |      |      |      |
+ * | MODE | HUE- | SAT- | VAL- |      |      |-------.    ,-------| VOL+ | MUTE | VOL- |      |      |WZ    |
  * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
  * |      |      |      |      |      |      |-------|    |-------|      |      |      |      |      |      |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
@@ -134,7 +157,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_ADJUST] = LAYOUT(
     RESET,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, COLEMAK,
     RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI, XXXXXXX, XXXXXXX,                   KC_MPRV, KC_MPLY, KC_MNXT, XXXXXXX, XXXXXXX, QWERTY,
-    RGB_MOD, RGB_HUD, RGB_SAD, RGB_VAD, XXXXXXX, XXXXXXX,                   KC_VOLU, KC_MUTE, KC_VOLD, XXXXXXX, XXXXXXX, XXXXXXX,
+    RGB_MOD, RGB_HUD, RGB_SAD, RGB_VAD, XXXXXXX, XXXXXXX,                   KC_VOLU, KC_MUTE, KC_VOLD, XXXXXXX, XXXXXXX, WZ,
     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
                       _______, _______, _______, _______, _______, _______,  _______, _______, _______, _______
   )
@@ -166,6 +189,9 @@ void render_default_layer_state(void) {
             break;
         case _QWERTY:
             oled_write_ln_P(PSTR("Qwert\n"), false);
+            break;
+        case _WZ:
+            oled_write_ln_P(PSTR("WZ\n"), false);
             break;
     }
 }
